@@ -5,26 +5,6 @@ export class MyRoom extends Room<MyRoomState> {
   onCreate(options: any) {
     this.setState(new MyRoomState())
 
-    // add cubes
-  
-    this.onMessage('pickColor', (client, message) => {
-      const player = this.state.players.get(client.sessionId)
-      player.color = message.color
-      this.broadcast("flashColor", {color: message.color})
-      //this.send(client, "blue", {})
-      console.log(player.name, ' picked color ', message.color)
-    })
-
-
-    this.onMessage('setColor', (client, message) => {
-      const player = this.state.players.get(client.sessionId) 
-      this.state.cubes.forEach((cube)=>{
-        if(cube.id == message.id){
-          cube.color = player.color
-        }
-      })
-      console.log(player.name, ' changed ', message.id, " to ", player.color)
-    })
 
   }
 
