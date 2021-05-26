@@ -1,4 +1,5 @@
 import * as utils from '@dcl/ecs-scene-utils'
+import { Room } from 'colyseus.js'
 
 export enum cubeColor {
     NEUTRAL,
@@ -29,15 +30,15 @@ lightBlueMaterial.albedoColor = Color3.FromHexString('#5e6eff')
 lightBlueMaterial.roughness = 1
 
 
-
-
 export class Cone extends Entity{
     color: cubeColor = cubeColor.NEUTRAL
-    constructor(position: TranformConstructorArgs, color){
+    room: Room
+    constructor(position: TranformConstructorArgs, color, room){
 
        super()
        this.color = color
-       
+       this.room = room
+
         this.addComponent(
           new Transform(position)
         )
@@ -46,7 +47,8 @@ export class Cone extends Entity{
           new OnPointerDown(
             (e) => {
                 playerColor = this.color
-                this.activate()
+                this.room.send("pickColor", {color: this.color})
+                // this.activate()
             },
             { button: ActionButton.POINTER, hoverText: 'Pick color' }
           )

@@ -1,4 +1,4 @@
-import { Schema, Context, type, MapSchema } from '@colyseus/schema'
+import { Schema, Context, type, MapSchema, ArraySchema } from '@colyseus/schema'
 
 export enum cubeColor {
   NEUTRAL,
@@ -21,7 +21,7 @@ export class Player extends Schema {
 export class Cube extends Schema {
   @type('number') id: number
   @type('number') color: cubeColor
-  constructor(id: number, name: string) {
+  constructor(id: number) {
     super()
     this.id = id
     this.color = cubeColor.NEUTRAL
@@ -29,7 +29,12 @@ export class Cube extends Schema {
 }
 
 export class MyRoomState extends Schema {
-  @type('number') fader1: number = 0
-  @type({ map: Cube }) cubes = new MapSchema<Cube>()
+  @type([Cube ]) cubes = new ArraySchema<Cube>()
   @type({ map: Player }) players = new MapSchema<Player>()
+  constructor(cubeCount: number = 8){
+    super()
+    for (let i= 0; i <= cubeCount; i++){
+      this.cubes.push(new Cube(i))
+    }
+  }
 }

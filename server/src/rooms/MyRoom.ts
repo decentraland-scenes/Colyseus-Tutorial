@@ -4,8 +4,6 @@ import { cubeColor, MyRoomState, Player } from './schema/MyRoomState'
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: any) {
     this.setState(new MyRoomState())
-
-    // add cubes
   
     this.onMessage('pickColor', (client, message) => {
       const player = this.state.players.get(client.sessionId)

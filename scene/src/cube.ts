@@ -1,31 +1,36 @@
 import * as utils from '@dcl/ecs-scene-utils'
+import { Room } from 'colyseus.js'
 import { blueMaterial, cubeColor, lightBlueMaterial, lightRedMaterial, playerColor, redMaterial } from './cones'
 
 
 // list of all cubes
-export let cubes: Entity[] = []
+export let cubes: Cube[] = []
 
 
   
 export class Cube extends Entity{
-    constructor(position: TranformConstructorArgs){
+    id: number
+    room: Room
+    constructor(position: TranformConstructorArgs, id: number, room: Room){
 
-       super()
+        super()
+        this.room = room
+        this.id = id
         this.addComponent(
-          new Transform(position)
+        new Transform(position)
         )
         this.addComponent(new BoxShape())
         this.addComponent(
-          new OnPointerDown(
+        new OnPointerDown(
             (e) => {
-              this.activate(playerColor)
-             //room.send()
+            //this.activate(playerColor)
+            this.room.send("setColor", {id: this.id})
             },
             { button: ActionButton.POINTER, hoverText: 'Activate' }
-          )
+        )
         )
         engine.addEntity(this)
-       
+
         cubes.push(this)
 
     }
