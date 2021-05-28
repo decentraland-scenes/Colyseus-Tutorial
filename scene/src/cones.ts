@@ -7,9 +7,6 @@ export enum cubeColor {
     RED
   }
 
-export let playerColor : cubeColor = cubeColor.NEUTRAL
-  
-
 // reusable materials
 export let redMaterial = new Material()
 redMaterial.albedoColor = Color3.Red()
@@ -46,7 +43,6 @@ export class Cone extends Entity{
         this.addComponent(
           new OnPointerDown(
             (e) => {
-                playerColor = this.color
                 this.room.send("pickColor", {color: this.color})
                 // this.activate()
             },
