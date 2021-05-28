@@ -3,7 +3,7 @@ import { blueMaterial, cubeColor, lightBlueMaterial, lightRedMaterial, playerCol
 
 
 // list of all cubes
-export let cubes: Entity[] = []
+export let cubes: Cube[] = []
 
 export class Cube extends Entity{
     constructor(position: TranformConstructorArgs){
