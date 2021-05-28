@@ -1,6 +1,6 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import { Room } from 'colyseus.js'
-import { blueMaterial, cubeColor, lightBlueMaterial, lightRedMaterial, playerColor, redMaterial } from './cones'
+import { blueMaterial, cubeColor, lightBlueMaterial, lightRedMaterial, redMaterial } from './cones'
 
 
 // list of all cubes
@@ -23,7 +23,6 @@ export class Cube extends Entity{
         this.addComponent(
         new OnPointerDown(
             (e) => {
-            //this.activate(playerColor)
             this.room.send("setColor", {id: this.id})
             },
             { button: ActionButton.POINTER, hoverText: 'Activate' }
