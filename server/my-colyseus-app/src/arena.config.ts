@@ -16,7 +16,6 @@ export default Arena({
         gameServer
         .define('my_room', MyRoom)
         .filterBy(['realm'])
-
     },
 
     initializeExpress: (app) => {
