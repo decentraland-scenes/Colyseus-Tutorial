@@ -1,17 +1,16 @@
-import { getCurrentRealm } from '@decentraland/EnvironmentAPI'
 import { Cone, cubeColor } from './cones'
 import { Cube } from './cube'
 
-
-
-// add cubes
-for (let i = 0; i < 8; i++) {
-  let cube = new Cube(
-    {
-      position: new Vector3(i * 2 + 1, 1, 4),
-    }
-  )
-}
+// ground
+let floor = new Entity()
+floor.addComponent(new GLTFShape('models/FloorBaseGrass.glb'))
+floor.addComponent(
+  new Transform({
+    position: new Vector3(8, 0, 8),
+    scale: new Vector3(1.6, 0.1, 1.6),
+  })
+)
+engine.addEntity(floor)
 
 
 // add cones
@@ -25,17 +24,15 @@ let redCone = new Cone(
   cubeColor.RED
 )
 
+// add cubes
+for (let i = 0; i < 8; i++) {
+  let cube = new Cube(
+    {
+      position: new Vector3(i * 2 + 1, 1, 4),
+    }
+  )
+}
 
-// ground
-let floor = new Entity()
-floor.addComponent(new GLTFShape('models/FloorBaseGrass.glb'))
-floor.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-    scale: new Vector3(1.6, 0.1, 1.6),
-  })
-)
-engine.addEntity(floor)
 
 
 

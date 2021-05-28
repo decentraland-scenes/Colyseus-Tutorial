@@ -5,8 +5,6 @@ import { blueMaterial, cubeColor, lightBlueMaterial, lightRedMaterial, playerCol
 // list of all cubes
 export let cubes: Entity[] = []
 
-
-  
 export class Cube extends Entity{
     constructor(position: TranformConstructorArgs){
 
@@ -19,17 +17,14 @@ export class Cube extends Entity{
           new OnPointerDown(
             (e) => {
               this.activate(playerColor)
-             //room.send()
             },
             { button: ActionButton.POINTER, hoverText: 'Activate' }
           )
         )
         engine.addEntity(this)
-       
+    
         cubes.push(this)
-
     }
-
     activate(color: cubeColor){
 
         if(this.hasComponent(utils.Delay)){
@@ -42,9 +37,8 @@ export class Cube extends Entity{
             this.addComponentOrReplace(redMaterial)
             this.addComponentOrReplace(new utils.Delay(1000,()=>{
                 this.addComponentOrReplace(lightRedMaterial)
-            } ))
-           
-        }else if(color == cubeColor.BLUE){
+            } ))   
+        } else if(color == cubeColor.BLUE){
             this.addComponentOrReplace(blueMaterial)
             this.addComponentOrReplace(new utils.Delay(1000,()=>{
                 this.addComponentOrReplace(lightBlueMaterial)

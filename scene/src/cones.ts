@@ -8,7 +8,6 @@ export enum cubeColor {
 
 export let playerColor : cubeColor = cubeColor.NEUTRAL
   
-
 // reusable materials
 export let redMaterial = new Material()
 redMaterial.albedoColor = Color3.Red()
@@ -29,14 +28,12 @@ lightBlueMaterial.albedoColor = Color3.FromHexString('#5e6eff')
 lightBlueMaterial.roughness = 1
 
 
-
-
 export class Cone extends Entity{
     color: cubeColor = cubeColor.NEUTRAL
-    constructor(position: TranformConstructorArgs, color){
+    constructor(position: TranformConstructorArgs, color: cubeColor){
 
-       super()
-       this.color = color
+        super()
+        this.color = color
        
         this.addComponent(
           new Transform(position)
@@ -59,14 +56,13 @@ export class Cone extends Entity{
 
         engine.addEntity(this) 
     }
-
     activate(){
        if(this.color == cubeColor.RED){
             this.addComponentOrReplace(redMaterial)
             utils.setTimeout(1000, ()=>{
                 this.addComponentOrReplace(lightRedMaterial)
             })
-        }else if(this.color == cubeColor.BLUE){
+        } else if(this.color == cubeColor.BLUE){
             this.addComponentOrReplace(blueMaterial)
             utils.setTimeout(1000, ()=>{
                 this.addComponentOrReplace(lightBlueMaterial)
