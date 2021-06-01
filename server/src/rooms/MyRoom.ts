@@ -9,7 +9,7 @@ export class MyRoom extends Room<MyRoomState> {
       const player = this.state.players.get(client.sessionId)
       player.color = message.color
       this.broadcast("flashColor", {color: message.color})
-      //this.send(client, "blue", {})
+      //this.send(client, "flashColor", {color: message.color})
       console.log(player.name, ' picked color ', message.color)
     })
 
