@@ -1,4 +1,5 @@
 import * as utils from '@dcl/ecs-scene-utils'
+import { Room } from 'colyseus.js'
 
 export enum cubeColor {
     NEUTRAL,
@@ -6,8 +7,6 @@ export enum cubeColor {
     RED
   }
 
-export let playerColor : cubeColor = cubeColor.NEUTRAL
-  
 // reusable materials
 export let redMaterial = new Material()
 redMaterial.albedoColor = Color3.Red()
@@ -30,11 +29,13 @@ lightBlueMaterial.roughness = 1
 
 export class Cone extends Entity{
     color: cubeColor = cubeColor.NEUTRAL
-    constructor(position: TranformConstructorArgs, color: cubeColor){
+    room: Room
+    constructor(position: TranformConstructorArgs, color, room){
 
-        super()
-        this.color = color
-       
+       super()
+       this.color = color
+       this.room = room
+
         this.addComponent(
           new Transform(position)
         )
@@ -42,8 +43,8 @@ export class Cone extends Entity{
         this.addComponent(
           new OnPointerDown(
             (e) => {
-                playerColor = this.color
-                this.activate()
+                this.room.send("pickColor", {color: this.color})
+                // this.activate()
             },
             { button: ActionButton.POINTER, hoverText: 'Pick color' }
           )
@@ -56,13 +57,14 @@ export class Cone extends Entity{
 
         engine.addEntity(this) 
     }
+
     activate(){
        if(this.color == cubeColor.RED){
             this.addComponentOrReplace(redMaterial)
             utils.setTimeout(1000, ()=>{
                 this.addComponentOrReplace(lightRedMaterial)
             })
-        } else if(this.color == cubeColor.BLUE){
+        }else if(this.color == cubeColor.BLUE){
             this.addComponentOrReplace(blueMaterial)
             utils.setTimeout(1000, ()=>{
                 this.addComponentOrReplace(lightBlueMaterial)
