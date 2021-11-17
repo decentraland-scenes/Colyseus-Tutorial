@@ -14,9 +14,11 @@
     "decentraland-ecs": "^6.6.5-20210526150715.commit-82a9e37"
   },
   "dependencies": {
-    "@dcl/ecs-scene-utils": "^1.6.2-20210408012032.commit-5921be1"
+    "@dcl/ecs-scene-utils": "^1.6.2-20210408012032.commit-5921be1",
+    "colyseus.js": "^0.14.12"
   },
   "bundleDependencies": [
-    "@dcl/ecs-scene-utils"
+    "@dcl/ecs-scene-utils",
+    "colyseus.js"
   ]
 }

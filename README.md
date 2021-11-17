@@ -2,7 +2,7 @@
 
 A multiplayer scene with [Colyseus]{https://www.colyseus.io/} for websockets multiplayer messaging. The game logic is carried out server-side.
 
-![demo](screenshot/screenshot.gif)
+![demo]()
 
 This scene shows you:
 
